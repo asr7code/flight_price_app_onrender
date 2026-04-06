@@ -9,7 +9,7 @@ app = Flask(__name__)
 # Load dataset
 df = pd.read_csv('https://raw.githubusercontent.com/asr7code/ML-dataset/main/flight_dataset.csv')
 
-# Encode categorical columns
+# Encoding
 le_airline = LabelEncoder()
 le_source = LabelEncoder()
 le_dest = LabelEncoder()
@@ -28,6 +28,10 @@ model.fit(X, y)
 def home():
     return render_template("index.html")
 
+@app.route('/form')
+def form():
+    return render_template("form.html")
+
 @app.route('/predict', methods=['POST'])
 def predict():
     try:
@@ -37,7 +41,7 @@ def predict():
         Total_Stops = int(request.form['Total_Stops'])
         Date = int(request.form['Date'])
 
-        # 🔥 Auto-filled values (important)
+        # Auto-fill remaining features
         Month = 3
         Year = 2019
         Dep_hours = 10
@@ -57,14 +61,13 @@ def predict():
 
         prediction = model.predict(features)[0]
 
-        return render_template("index.html", prediction_text=f"Estimated Price: ₹ {round(prediction, 2)}")
+        return render_template(
+            "form.html",
+            prediction_text=f"Estimated Price: ₹ {round(prediction, 2)}"
+        )
 
     except Exception as e:
-        return render_template("index.html", prediction_text=f"Error: {str(e)}")
-
-@app.route('/form')
-def form():
-    return render_template("form.html")
+        return render_template("form.html", prediction_text=f"Error: {str(e)}")
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
