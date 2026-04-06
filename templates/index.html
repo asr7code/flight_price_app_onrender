@@ -1,66 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Flight Price Predictor</title>
+    <title>Welcome</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
-<body>
+<body class="home-bg">
 
-<h1>Machine Learning based Flight Price Prediction System</h1>
-
-<div class="form-container">
-    <form action="/predict" method="post">
-
-        <div class="row">
-            <label>Airlines</label>
-            <select name="Airline" required>
-                <option value="0">IndiGo</option>
-                <option value="1">Air India</option>
-                <option value="2">Jet Airways</option>
-                <option value="3">SpiceJet</option>
-                <option value="4">Multiple carriers</option>
-                <option value="5">GoAir</option>
-                <option value="6">Vistara</option>
-            </select>
+    <div class="overlay">
+        <div class="welcome-box">
+            <h1>✈️ Welcome to Flight Price Predictor</h1>
+            <a href="/form">
+                <button class="start-btn">Predict Now</button>
+            </a>
         </div>
-
-        <div class="row">
-            <label>Source</label>
-            <select name="Source" required>
-                <option value="0">Banglore</option>
-                <option value="1">Kolkata</option>
-                <option value="2">Delhi</option>
-                <option value="3">Chennai</option>
-            </select>
-        </div>
-
-        <div class="row">
-            <label>Destination</label>
-            <select name="Destination" required>
-                <option value="0">New Delhi</option>
-                <option value="1">Banglore</option>
-                <option value="2">Cochin</option>
-                <option value="3">Kolkata</option>
-            </select>
-        </div>
-
-        <div class="row">
-            <label>Total Stops (0-4)</label>
-            <input type="number" name="Total_Stops" required>
-        </div>
-
-        <div class="row">
-            <label>Date (1-31)</label>
-            <input type="number" name="Date" required>
-        </div>
-
-        <button type="submit">Predict Fare</button>
-
-    </form>
-
-    <h2>{{ prediction_text }}</h2>
-</div>
+    </div>
 
 </body>
 </html>
