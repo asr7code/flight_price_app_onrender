@@ -9,7 +9,7 @@ app = Flask(__name__)
 # Load dataset
 df = pd.read_csv('https://raw.githubusercontent.com/asr7code/ML-dataset/main/flight_dataset.csv')
 
-# Encode
+# Encode categorical columns
 le_airline = LabelEncoder()
 le_source = LabelEncoder()
 le_dest = LabelEncoder()
@@ -31,11 +31,36 @@ def home():
 @app.route('/predict', methods=['POST'])
 def predict():
     try:
-        data = [int(x) for x in request.form.values()]
-        prediction = model.predict([data])[0]
-        return render_template("index.html", prediction_text=f"Estimated Price: ₹ {round(prediction,2)}")
+        Airline = int(request.form['Airline'])
+        Source = int(request.form['Source'])
+        Destination = int(request.form['Destination'])
+        Total_Stops = int(request.form['Total_Stops'])
+        Date = int(request.form['Date'])
+
+        # 🔥 Auto-filled values (important)
+        Month = 3
+        Year = 2019
+        Dep_hours = 10
+        Dep_min = 0
+        Arrival_hours = 12
+        Arrival_min = 0
+        Duration_hours = 2
+        Duration_min = 30
+
+        features = [[
+            Airline, Source, Destination, Total_Stops,
+            Date, Month, Year,
+            Dep_hours, Dep_min,
+            Arrival_hours, Arrival_min,
+            Duration_hours, Duration_min
+        ]]
+
+        prediction = model.predict(features)[0]
+
+        return render_template("index.html", prediction_text=f"Estimated Price: ₹ {round(prediction, 2)}")
+
     except Exception as e:
-        return render_template("index.html", prediction_text=str(e))
+        return render_template("index.html", prediction_text=f"Error: {str(e)}")
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
