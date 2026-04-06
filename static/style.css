@@ -1,21 +1,63 @@
+/* COMMON */
 body {
-    font-family: Arial;
-    background: url("https://images.unsplash.com/photo-1504198458649-3128b932f49b") no-repeat center center/cover;
-    text-align: center;
     margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* ===== HOME PAGE ===== */
+.home-bg {
+    background: url("https://images.unsplash.com/photo-1619941400844-ec5ef7495cb8?q=80&w=1073&auto=format&fit=crop") no-repeat center center/cover;
+    height: 100vh;
+}
+
+.overlay {
+    background: rgba(0,0,0,0.6);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.welcome-box {
+    text-align: center;
+    color: white;
+}
+
+.start-btn {
+    margin-top: 20px;
+    padding: 15px 30px;
+    font-size: 18px;
+    background: linear-gradient(45deg, #00c6ff, #0072ff);
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.start-btn:hover {
+    transform: scale(1.1);
+    background: linear-gradient(45deg, #ff512f, #dd2476);
+}
+
+/* ===== FORM PAGE ===== */
+.form-bg {
+    background: url("https://images.unsplash.com/photo-1437846972679-9e6e537be46e?q=80&w=1171&auto=format&fit=crop") no-repeat center center/cover;
+    text-align: center;
 }
 
 h1 {
+    color: white;
     margin-top: 30px;
-    color: black;
 }
 
 .form-container {
     width: 500px;
     margin: 40px auto;
-    background: rgba(255,255,255,0.9);
-    padding: 20px;
-    border-radius: 10px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(12px);
+    padding: 25px;
+    border-radius: 15px;
 }
 
 .row {
@@ -26,25 +68,31 @@ h1 {
 
 label {
     width: 40%;
-    text-align: left;
+    color: white;
 }
 
 input, select {
     width: 55%;
-    padding: 8px;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
 }
 
 button {
     margin-top: 20px;
-    padding: 12px 20px;
+    padding: 14px;
     background: green;
     color: white;
     border: none;
     cursor: pointer;
-    width: 60%;
-    font-size: 16px;
+    width: 70%;
+    border-radius: 10px;
 }
 
 button:hover {
     background: darkgreen;
+}
+
+h2 {
+    color: white;
 }
