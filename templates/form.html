@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flight Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="form-bg">
+
+<h1>Flight Price Prediction</h1>
+
+<div class="form-container">
+    <form action="/predict" method="post" onsubmit="return validateRoute()">
+
+        <div class="row">
+            <label>Airlines</label>
+            <select name="Airline" required>
+                <option value="0">IndiGo</option>
+                <option value="1">Air India</option>
+                <option value="2">Jet Airways</option>
+                <option value="3">SpiceJet</option>
+                <option value="4">Multiple carriers</option>
+                <option value="5">GoAir</option>
+                <option value="6">Vistara</option>
+            </select>
+        </div>
+
+        <div class="row">
+            <label>Source</label>
+            <select name="Source" id="source" required>
+                <option value="0">Banglore</option>
+                <option value="1">Kolkata</option>
+                <option value="2">Delhi</option>
+                <option value="3">Chennai</option>
+            </select>
+        </div>
+
+        <div class="row">
+            <label>Destination</label>
+            <select name="Destination" id="destination" required>
+                <option value="0">New Delhi</option>
+                <option value="1">Banglore</option>
+                <option value="2">Cochin</option>
+                <option value="3">Kolkata</option>
+            </select>
+        </div>
+
+        <div class="row">
+            <label>Total Stops (0-4)</label>
+            <input type="number" name="Total_Stops" required>
+        </div>
+
+        <div class="row">
+            <label>Date (1-31)</label>
+            <input type="number" name="Date" required>
+        </div>
+
+        <button type="submit">Predict Fare</button>
+
+    </form>
+
+    <h2>{{ prediction_text }}</h2>
+</div>
+
+<!-- ✅ Validation Script -->
+<script>
+function validateRoute() {
+    let source = document.getElementById("source").value;
+    let destination = document.getElementById("destination").value;
+
+    // ❌ Same city rules
+    if (
+        (source == "2" && destination == "0") ||  // Delhi → New Delhi
+        (source == "0" && destination == "1") ||  // Banglore → Banglore
+        (source == "1" && destination == "3")     // Kolkata → Kolkata
+    ) {
+        alert("Source and Destination cannot be the same!");
+        return false;
+    }
+
+    return true;
+}
+</script>
+
+</body>
+</html>
